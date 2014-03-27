@@ -1,7 +1,5 @@
 <div id="go-messagearea" class="row">
 	<?php
-	$messages = go_messagearea()->get();
-
 	if ( $messages )
 	{
 		foreach ( $messages as $priority => $items )
@@ -26,7 +24,7 @@
 
 				?>
 				<div
-					class="go-messagearea-message type-<?php echo esc_attr( $item['type'] ); ?> twelve-columns columns"
+					class="go-messagearea-message type-<?php echo esc_attr( $item['type'] ); ?> boxed twelve-columns columns"
 					<?php
 					foreach ( $data as $key => $value )
 					{
