@@ -50,7 +50,7 @@
 			priority = parseInt( priority, 10 );
 		}//end else
 
-		var $message = $( '<div class="go-messagearea-message"/>' );
+		var $message = $( '<div class="go-messagearea-message twelve-columns columns"/>' );
 
 		var contents = message.contents || message.text || '';
 		$message.html( contents );
