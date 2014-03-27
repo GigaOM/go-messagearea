@@ -1,18 +1,23 @@
-go-messagearea
-==============
+=== Gigaom Message Area ===
+Contributors: borkweb
+Tags: widgets, admin
+Requires at least: 3.6
+Tested up to: 3.8.1
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Provide a hook-able message area
+Provides a widget with a PHP & JS hookable message area.
 
-## Instructions
+== Description ==
 
 Adding this widget to your layout gives you an area to inject messages
 (sorted by priority) onto your site.  Here's how:
 
-### Add a message
+__Add a message__
 
-__PHP__
+_PHP_
 
-```php
+```
 $message = array(
 	'id' => 'bacon-is-tasty',
 	'type' => 'success',
@@ -28,9 +33,9 @@ do_action( 'go_messagearea_add', $message, $priority );
 do_action( 'go_messagearea_replace', $message, $priority );
 ```
 
-__JS__
+_JS_
 
-```js
+```
 var message = {
 	id: 'bacon-is-tasty',
 	type: 'success',
@@ -50,11 +55,11 @@ $( document ).trigger( 'go-messagearea-replace', message, priority );
 go_messagearea.replace( message, priority );
 ```
 
-### Remove messages
+__Remove messages__
 
-__PHP__
+_PHP_
 
-```php
+```
 // delete any message with the provided message id
 do_action( 'go_messagearea_remove', $message_id );
 
@@ -62,9 +67,8 @@ do_action( 'go_messagearea_remove', $message_id );
 do_action( 'go_messagearea_remove', $message_id, $priority );
 ```
 
-__JS__
-
-```js
+_JS_
+```
 $( document ).trigger( 'go-messagearea-remove', message_code );
 
 // or
@@ -72,16 +76,30 @@ $( document ).trigger( 'go-messagearea-remove', message_code );
 go_messagearea.remove( message_code );
 ```
 
-### Get messages
+__Get messages__
 
-__PHP__
+_PHP_
 
-```php
+```
 $messages = apply_filters( 'go_messagearea_get', array() );
 ```
 
-__JS__
+_JS_
 
-```js
+```
 console.log( go_messagearea.messages );
 ```
+
+=== Links ===
+
+* [WordPress plugin page](http://wordpress.org/plugins/go-messagearea/)
+* [GitHub repo](https://github.com/GigaOM/go-messagearea)
+
+== Installation ==
+
+1. Upload `go-messagearea` to the `/wp-content/plugins/` directory
+1. Activate 'Gigaom MessageArea' through the 'Plugins' menu in WordPress
+
+== Contributing ==
+
+This plugin is developed and [available on GitHub](https://github.com/GigaOM/go-messagearea). Contributions and questions are welcome!
