@@ -6,6 +6,7 @@
 
 		$( document ).on( 'go-messagearea-add', this.event.add );
 		$( document ).on( 'go-messagearea-replace', this.event.replace );
+		$( document ).on( 'go-messagearea-remove', this.event.remove );
 	};
 
 	/**
@@ -89,7 +90,7 @@
 			this.$area.append( $message );
 			$message.fadeIn( 'fast' );
 			this.data_add( message, parseInt( $message.data( 'priority' ), 10 ) );
-			return;
+			return true;
 		}//end if
 
 		var $current = null;
@@ -114,6 +115,8 @@
 		$message.fadeIn( 'fast' );
 
 		this.data_add( message, parseInt( $message.data( 'priority' ), 10 ) );
+
+		return true;
 	};
 
 	/**
@@ -134,6 +137,8 @@
 
 		this.messages = [];
 		this.data_add( message, parseInt( $message.data( 'priority' ), 10 ) );
+
+		return true;
 	};
 
 	/**
@@ -178,6 +183,16 @@
 	 */
 	go_messagearea.event.replace = function( e, message, priority ) {
 		go_messagearea.replace( message, priority );
+	};
+
+	/**
+	 * Event to handle removing messages
+	 *
+	 * @param message Object Message object with (at minimum) these properties: contents & type
+	 * @param priority Integer Priority of the message. The lower the number, the higher on the page it'll be
+	 */
+	go_messagearea.event.remove = function( e, message_id, priority ) {
+		go_messagearea.remove( message_id, priority );
 	};
 })( jQuery );
 
