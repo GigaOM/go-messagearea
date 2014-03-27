@@ -1,4 +1,4 @@
-<div id="go-messagearea">
+<div id="go-messagearea" class="row">
 	<?php
 	$messages = go_messagearea()->get();
 
@@ -26,7 +26,7 @@
 
 				?>
 				<div
-					class="go-messagearea-message type-<?php echo esc_attr( $item['type'] ); ?>"
+					class="go-messagearea-message type-<?php echo esc_attr( $item['type'] ); ?> twelve-columns columns"
 					<?php
 					foreach ( $data as $key => $value )
 					{
