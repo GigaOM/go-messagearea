@@ -23,6 +23,13 @@ class GO_Messagearea_Widget extends WP_Widget
 		wp_localize_script( 'go-messagearea', 'go_messagearea', array( 'messages' => go_messagearea()->get() ) );
 		wp_enqueue_script( 'go-messagearea' );
 
+		$messages = go_messagearea()->get();
+
+		if ( count( $messages ) )
+		{
+			$args['before_widget'] = str_replace( 'class="', 'class="has-messages ', $args['before_widget'] );
+		}//end if
+
 		echo $args['before_widget'];
 		include __DIR__ . '/templates/widget-message-area.php';
 		echo $args['after_widget'];

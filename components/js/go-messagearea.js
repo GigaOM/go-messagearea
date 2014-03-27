@@ -2,7 +2,9 @@
 	go_messagearea.event = {};
 
 	go_messagearea.init = function() {
-		go_messagearea.$area = $( '#go-messagearea' );
+		this.$area = $( '#go-messagearea' );
+		this.$widget = this.$area.closest( '.widget' );
+		this.message_count = this.$area.find( '.go-messagearea-message' ).length;
 
 		$( document ).on( 'go-messagearea-add', this.event.add );
 		$( document ).on( 'go-messagearea-replace', this.event.replace );
@@ -18,19 +20,24 @@
 		}//end if
 
 		this.messages[ priority ][ message.id ] = message;
+		this.message_count++;
+
+		if ( ! this.$widget.hasClass( 'has-messages' ) ) {
+			this.$widget.addClass( 'has-messages' );
+		}//end if
 	};
 
 	/**
 	 * removes message data from the go_messagearea.messages array
 	 */
 	go_messagearea.data_remove = function( message_id, priority ) {
-		if ( 'undefined' != typeof this.messages[ priority ][ message_id ] ) {
-			delete this.messages[ priority ][ message_id ];
-
-			if ( ! this.messages[ priority ].length ) {
-				delete this.messages[ priority ];
-			}//end if
+		if ( 'undefined' == typeof this.messages[ priority ][ message_id ] ) {
+			return;
 		}//end if
+
+		delete this.messages[ priority ][ message_id ];
+
+		this.message_count--;
 	};
 
 	/**
@@ -162,6 +169,11 @@
 
 		$element.fadeOut( 'fast', function() {
 			$element.remove();
+
+			if ( this.message_count <= 0 ) {
+				this.message_count = 0;
+				this.$widget.removeClass( 'has-messages' );
+			}//end if
 		});
 	};
 
