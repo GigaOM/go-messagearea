@@ -12,7 +12,6 @@ class GO_Messagearea
 	public function __construct()
 	{
 		$this->plugin_url = plugins_url( '/', __FILE__ );
-		do_action( 'debug_robot', print_r( $this->plugin_url, TRUE ) );
 
 		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'widgets_init', array( $this, 'widgets_init' ) );
