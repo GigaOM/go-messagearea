@@ -18,12 +18,12 @@ class GO_Messagearea_Widget extends WP_Widget
 	/**
 	 * renders the widget
 	 */
-	public function widget( $args, $instance )
+	public function widget( $args, $unused_instance )
 	{
-		wp_localize_script( 'go-messagearea', 'go_messagearea', array( 'messages' => go_messagearea()->get() ) );
-		wp_enqueue_script( 'go-messagearea' );
+		$messages = apply_filters( 'go_messagearea_get', array() );
 
-		$messages = go_messagearea()->get();
+		wp_localize_script( 'go-messagearea', 'go_messagearea', array( 'messages' => $messages ) );
+		wp_enqueue_script( 'go-messagearea' );
 
 		if ( count( $messages ) )
 		{
