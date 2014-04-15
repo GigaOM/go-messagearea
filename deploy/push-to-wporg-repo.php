@@ -8,7 +8,7 @@ if ( 'cli' != php_sapi_name() )
 
 // main config
 $pluginslug = 'go-messagearea';
-$svn_repo_path= '/tmp/'. $pluginslug; // path to a temp SVN repo. No trailing slash (be cautious about incorrect paths, note that we rm the contents later)
+$svn_repo_path = '/tmp/' . $pluginslug; // path to a temp SVN repo. No trailing slash (be cautious about incorrect paths, note that we rm the contents later)
 $svn_repo_url = 'http://plugins.svn.wordpress.org/' . $pluginslug . '/trunk/'; // Remote SVN repo with no trailing slash
 $svn_ignore_files = array( // paths relative to the top of the svn_repo_path
 	'README.md',
@@ -33,7 +33,6 @@ Creating local copy of SVN repo at $svn_repo_path
 ";
 passthru( "svn checkout $svn_repo_url $svn_repo_path" );
 
-
 echo '
 Prepping the SVN repo to receive the git
 ';
@@ -43,7 +42,6 @@ echo '
 Exporting the HEAD of master from git to SVN
 ';
 passthru( "git checkout-index -a -f --prefix=$svn_repo_path/" );
-
 
 echo '
 Exporting git submodules to SVN
@@ -72,7 +70,7 @@ passthru( "svn st $svn_repo_path | grep '^\?' | sed 's/\?\s*//g' | xargs svn add
 echo '
 Now forcibly removing the files that are supposed to be ignored in the svn repo
 ';
-foreach( $svn_ignore_files as $file )
+foreach ( $svn_ignore_files as $file )
 {
 	passthru( "svn rm --force $svn_repo_path/$file" );
 }

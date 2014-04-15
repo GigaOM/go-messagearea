@@ -83,8 +83,11 @@ class GO_Messagearea
 
 	/**
 	 * gets the message stack
+	 *
+	 * @param array $unused_messages this is hooked at the highest priority to initialize the messages
+	 * @param int $priority the priority of the message, used for sorting
 	 */
-	public function get( $messages, $priority = NULL )
+	public function get( $unused_messages, $priority = NULL )
 	{
 		if ( $priority )
 		{
