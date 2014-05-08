@@ -49,6 +49,10 @@ class GO_Messagearea
 
 	/**
 	 * hooked to the go_messagearea_add action to tack on messages for display
+	 *
+	 * @param array $args requires contents (string) and id (int)
+	 * @param int $priority default is set to 10, the priority of the message, used for sorting
+	 * @return Null
 	 */
 	public function add( $args, $priority = 10 )
 	{
@@ -69,6 +73,10 @@ class GO_Messagearea
 
 	/**
 	 * hooked to the go_messagearea_replace action to replace all messages with the provided message
+	 *
+	 * @param array $args requires contents (string) and id (int)
+	 * @param int $priority default is set to 10, the priority of the message, used for sorting
+	 * @return Null
 	 */
 	public function replace( $args, $priority = 10 )
 	{
@@ -85,7 +93,8 @@ class GO_Messagearea
 	 * gets the message stack
 	 *
 	 * @param array $unused_messages this is hooked at the highest priority to initialize the messages
-	 * @param int $priority the priority of the message, used for sorting
+	 * @param int $priority default set to null, the priority of the message, used for sorting
+	 * @return mixed if priority is null returns full config otherwise returns the config element indicated by the priority
 	 */
 	public function get( $unused_messages, $priority = NULL )
 	{
@@ -101,6 +110,10 @@ class GO_Messagearea
 
 	/**
 	 * removes a message from the message stack
+	 *
+	 * @param int $id the array index of the message
+	 * @param int $priority default set to null, the priority of the message, used for sorting
+	 * @return Null
 	 */
 	public function remove( $id, $priority = NULL )
 	{
@@ -128,6 +141,9 @@ class GO_Messagearea
 
 	/**
 	 * lazy load the script config
+	 *
+	 * @param string $key Optional, default to null
+	 * @return mixed if key is null returns full config otherwise returns the config element indicated by the key
 	 */
 	private function script_config( $key = NULL )
 	{
@@ -147,6 +163,9 @@ class GO_Messagearea
 
 /**
  * singleton
+ *
+ * @global GO_Messagearea $go_messagearea
+ * @return GO_Messagearea
  */
 function go_messagearea()
 {

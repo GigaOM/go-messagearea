@@ -17,6 +17,9 @@ class GO_Messagearea_Widget extends WP_Widget
 
 	/**
 	 * renders the widget
+	 *
+	 * @param array $args
+	 * @param array $unused_instance The Widget option
 	 */
 	public function widget( $args, $unused_instance )
 	{
