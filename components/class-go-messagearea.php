@@ -105,6 +105,9 @@ class GO_Messagearea
 			return isset( $this->messages[ $priority ] ) ? $this->messages[ $priority ] : array();
 		}//end if
 
+		// let's make sure the priorities are ordered appropriately
+		ksort( $this->messages );
+
 		return $this->messages;
 	}//end get
 
