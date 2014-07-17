@@ -1,4 +1,5 @@
 (function( $ ) {
+	'use strict';
 	go_messagearea.event = {};
 
 	go_messagearea.init = function() {
@@ -6,6 +7,7 @@
 		this.$widget = this.$area.closest( '.widget' );
 		this.message_count = this.$area.find( '.go-messagearea-message' ).length;
 
+		$( document ).on( 'click', '.go-messagearea-message .go-messagearea-close', this.event.close );
 		$( document ).on( 'go-messagearea-add', this.event.add );
 		$( document ).on( 'go-messagearea-replace', this.event.replace );
 		$( document ).on( 'go-messagearea-remove', this.event.remove );
@@ -15,7 +17,7 @@
 	 * adds message data to the go_messagearea.messages array
 	 */
 	go_messagearea.data_add = function( message, priority ) {
-		if ( 'undefined' == typeof this.messages[ priority ] ) {
+		if ( 'undefined' === typeof this.messages[ priority ] ) {
 			this.messages[ priority ] = {};
 		}//end if
 
@@ -31,7 +33,7 @@
 	 * removes message data from the go_messagearea.messages array
 	 */
 	go_messagearea.data_remove = function( message_id, priority ) {
-		if ( 'undefined' == typeof this.messages[ priority ][ message_id ] ) {
+		if ( 'undefined' === typeof this.messages[ priority ][ message_id ] ) {
 			return;
 		}//end if
 
@@ -47,7 +49,7 @@
 	 * @param priority Integer Priority of the message. The lower the number, the higher on the page it'll be
 	 */
 	go_messagearea.build = function( message, priority ) {
-		if ( 'undefined' == message.contents && 'undefined' == message.text ) {
+		if ( 'undefined' === typeof message.contents && 'undefined' === typeof message.text ) {
 			return false;
 		}//end if
 
@@ -64,12 +66,12 @@
 
 		$message.attr( 'data-priority', priority );
 
-		if ( 'undefined' != message.type ) {
+		if ( 'undefined' !== typeof message.type ) {
 			$message.addClass( 'type-' + message.type );
 			$message.attr( 'data-type', message.type );
 		}//end if
 
-		if ( 'undefined' != message.id ) {
+		if ( 'undefined' !== typeof message.id ) {
 			$message.attr( 'data-id', message.id );
 		}//end if
 
@@ -85,13 +87,12 @@
 	 * @param priority Integer Priority of the message. The lower the number, the higher on the page it'll be
 	 */
 	go_messagearea.insert = function( message, priority ) {
-		if ( 'undefined' == message.id ) {
+		if ( 'undefined' === typeof message.id ) {
 			return false;
 		}//end if
 
 		var $message = this.build( message, priority );
 		var $messages = this.$area.find( '.go-messagearea-message' );
-		var earliest_priority = 0;
 
 		if ( ! $messages.length ) {
 			this.$area.append( $message );
@@ -133,7 +134,7 @@
 	 * @param priority Integer Priority of the message. The lower the number, the higher on the page it'll be
 	 */
 	go_messagearea.replace = function( message, priority ) {
-		if ( 'undefined' == message.id ) {
+		if ( 'undefined' === typeof message.id ) {
 			return false;
 		}//end if
 
@@ -206,8 +207,21 @@
 	go_messagearea.event.remove = function( e, message_id, priority ) {
 		go_messagearea.remove( message_id, priority );
 	};
-})( jQuery );
 
-jQuery( function( $ ) {
-	go_messagearea.init();
-});
+	/**
+	 * Handles the closing of a message
+	 */
+	go_messagearea.event.close = function( e ) {
+		e.preventDefault();
+
+		var $el = $( this ).closest( '.go-messagearea-message' );
+		var message_id = $el.data( 'id' );
+		var priority = $el.data( 'priority' );
+
+		go_messagearea.remove( message_id, priority );
+	};
+
+	$( function() {
+		go_messagearea.init();
+	});
+})( jQuery );
