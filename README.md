@@ -85,3 +85,7 @@ __JS__
 ```js
 console.log( go_messagearea.messages );
 ```
+
+### Add element that closes the message area
+
+Any element within a message area that has the class `go-messagearea-close` will, when clicked, close the message.

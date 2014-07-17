@@ -6,6 +6,7 @@
 		this.$widget = this.$area.closest( '.widget' );
 		this.message_count = this.$area.find( '.go-messagearea-message' ).length;
 
+		$( document ).on( 'click', '.go-messagearea-close', this.event.close );
 		$( document ).on( 'go-messagearea-add', this.event.add );
 		$( document ).on( 'go-messagearea-replace', this.event.replace );
 		$( document ).on( 'go-messagearea-remove', this.event.remove );
@@ -204,6 +205,19 @@
 	 * @param priority Integer Priority of the message. The lower the number, the higher on the page it'll be
 	 */
 	go_messagearea.event.remove = function( e, message_id, priority ) {
+		go_messagearea.remove( message_id, priority );
+	};
+
+	/**
+	 * Handles the closing of a message
+	 */
+	go_messagearea.event.close = function( e ) {
+		e.preventDefault();
+
+		var $el = $( this ).closest( '.go-messagearea-message' );
+		var message_id = $el.data( 'id' );
+		var priority = $el.data( 'priority' );
+
 		go_messagearea.remove( message_id, priority );
 	};
 })( jQuery );
