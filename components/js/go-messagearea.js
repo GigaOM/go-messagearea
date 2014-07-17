@@ -6,7 +6,7 @@
 		this.$widget = this.$area.closest( '.widget' );
 		this.message_count = this.$area.find( '.go-messagearea-message' ).length;
 
-		$( document ).on( 'click', '.go-messagearea-close', this.event.close );
+		$( document ).on( 'click', '.go-messagearea-message .go-messagearea-close', this.event.close );
 		$( document ).on( 'go-messagearea-add', this.event.add );
 		$( document ).on( 'go-messagearea-replace', this.event.replace );
 		$( document ).on( 'go-messagearea-remove', this.event.remove );
