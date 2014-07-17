@@ -1,4 +1,5 @@
 (function( $ ) {
+	'use strict';
 	go_messagearea.event = {};
 
 	go_messagearea.init = function() {
@@ -16,7 +17,7 @@
 	 * adds message data to the go_messagearea.messages array
 	 */
 	go_messagearea.data_add = function( message, priority ) {
-		if ( 'undefined' == typeof this.messages[ priority ] ) {
+		if ( 'undefined' === typeof this.messages[ priority ] ) {
 			this.messages[ priority ] = {};
 		}//end if
 
@@ -32,7 +33,7 @@
 	 * removes message data from the go_messagearea.messages array
 	 */
 	go_messagearea.data_remove = function( message_id, priority ) {
-		if ( 'undefined' == typeof this.messages[ priority ][ message_id ] ) {
+		if ( 'undefined' === typeof this.messages[ priority ][ message_id ] ) {
 			return;
 		}//end if
 
@@ -48,7 +49,7 @@
 	 * @param priority Integer Priority of the message. The lower the number, the higher on the page it'll be
 	 */
 	go_messagearea.build = function( message, priority ) {
-		if ( 'undefined' == message.contents && 'undefined' == message.text ) {
+		if ( 'undefined' === typeof message.contents && 'undefined' === typeof message.text ) {
 			return false;
 		}//end if
 
@@ -65,12 +66,12 @@
 
 		$message.attr( 'data-priority', priority );
 
-		if ( 'undefined' != message.type ) {
+		if ( 'undefined' !== typeof message.type ) {
 			$message.addClass( 'type-' + message.type );
 			$message.attr( 'data-type', message.type );
 		}//end if
 
-		if ( 'undefined' != message.id ) {
+		if ( 'undefined' !== typeof message.id ) {
 			$message.attr( 'data-id', message.id );
 		}//end if
 
@@ -86,13 +87,12 @@
 	 * @param priority Integer Priority of the message. The lower the number, the higher on the page it'll be
 	 */
 	go_messagearea.insert = function( message, priority ) {
-		if ( 'undefined' == message.id ) {
+		if ( 'undefined' === typeof message.id ) {
 			return false;
 		}//end if
 
 		var $message = this.build( message, priority );
 		var $messages = this.$area.find( '.go-messagearea-message' );
-		var earliest_priority = 0;
 
 		if ( ! $messages.length ) {
 			this.$area.append( $message );
@@ -134,7 +134,7 @@
 	 * @param priority Integer Priority of the message. The lower the number, the higher on the page it'll be
 	 */
 	go_messagearea.replace = function( message, priority ) {
-		if ( 'undefined' == message.id ) {
+		if ( 'undefined' === typeof message.id ) {
 			return false;
 		}//end if
 
@@ -220,8 +220,8 @@
 
 		go_messagearea.remove( message_id, priority );
 	};
-})( jQuery );
 
-jQuery( function( $ ) {
-	go_messagearea.init();
-});
+	$( function() {
+		go_messagearea.init();
+	});
+})( jQuery );
