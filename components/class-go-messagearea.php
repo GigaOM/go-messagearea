@@ -29,9 +29,11 @@ class GO_Messagearea
 	 */
 	public function init()
 	{
+		$js_min = ( defined( 'GO_DEV' ) && GO_DEV ) ? 'lib' : 'min';
+
 		wp_register_script(
 			'go-messagearea',
-			"{$this->plugin_url}js/go-messagearea.js",
+			"{$this->plugin_url}js/{$js_min}/go-messagearea.js",
 			array( 'jquery' ),
 			$this->script_config( 'version' ),
 			TRUE
